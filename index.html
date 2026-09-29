@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yorug'lik Tugagan Joyda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0c0c10;--ink2:#17171d;--line:#2a2a33;--paper:#ebe6da;--dim:#9a968c;--sig:#ff2d6f;
+--serif:"Shippori Mincho B1","Hiragino Mincho ProN",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:auto}
+body{background:var(--ink);color:var(--paper);font:400 16px/1.6 var(--sans);min-height:100vh;padding-top:env(safe-area-inset-top,0)}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:1px solid var(--line);padding:.55rem 1rem;border-radius:2px}
+button:hover,button:focus-visible{border-color:var(--sig);outline:none}
+button.main{background:var(--paper);color:var(--ink);border-color:var(--paper);font-weight:600}
+button.main:hover{background:var(--sig);border-color:var(--sig);color:#fff}
+button[disabled]{opacity:.3;pointer-events:none}
+/* home */
+.hero{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:2.5rem;max-width:960px;margin:0 auto;padding:3rem 1.25rem 2rem;align-items:end}
+.hero img{width:100%;display:block;border:1px solid var(--line)}
+.hero h1{font:800 clamp(2.2rem,6vw,3.6rem)/1.05 var(--serif);letter-spacing:-.01em}
+.jp{font:600 1.1rem var(--serif);color:var(--dim);margin:.6rem 0 1.2rem}
+.hero p{max-width:44ch;color:#c9c4b8;margin-bottom:1.4rem}
+.status{color:var(--sig);font-weight:600;margin-bottom:1.4rem}
+.list{max-width:960px;margin:0 auto;padding:1rem 1.25rem 4rem}
+.list h2{font:600 1.3rem var(--serif);margin-bottom:.8rem}
+.ch{display:flex;gap:1rem;align-items:center;width:100%;text-align:left;padding:.8rem 0;border:0;border-top:1px solid var(--line);border-radius:0}
+.ch:hover{background:var(--ink2)}
+.ch .n{font:800 1.5rem var(--serif);width:2.4rem;color:var(--dim)}
+.ch .t{flex:1}.ch small{color:var(--dim)}
+.ch.read .n{color:var(--sig)}
+.soon{color:var(--dim);padding:.8rem 0;border-top:1px solid var(--line)}
+/* reader */
+.bar{position:sticky;top:0;z-index:5;background:rgba(12,12,16,.92);backdrop-filter:blur(8px);padding-top:env(safe-area-inset-top,0);border-bottom:1px solid var(--line)}
+.bar .row{display:flex;gap:.6rem;align-items:center;padding:.5rem .8rem;max-width:960px;margin:0 auto}
+.bar .ttl{flex:1;font:600 .95rem var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog{height:3px;background:var(--line)}.prog i{display:block;height:100%;width:0;background:var(--sig)}
+.v img{display:block;width:100%;max-width:820px;margin:0 auto;min-height:60vh;background:var(--ink2)}
+.p{display:flex;flex-direction:column;align-items:center;height:calc(100dvh - 60px - env(safe-area-inset-top,0));position:relative}
+.p img{max-width:100%;max-height:calc(100% - 34px);object-fit:contain;margin:auto 0}
+.p .zone{position:absolute;top:0;bottom:34px;width:38%;border:0;padding:0;border-radius:0}
+.p .zl{left:0}.p .zr{right:0}
+.p .cnt{height:34px;color:var(--dim);font-size:.85rem;line-height:34px}
+.end{max-width:820px;margin:0 auto;padding:3rem 1.25rem 5rem;text-align:center}
+.end h3{font:800 1.6rem var(--serif);margin-bottom:.4rem}.end p{color:var(--dim);margin-bottom:1.4rem}
+.end .btns{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+.p .end{margin:auto;padding:1rem}
+@media(max-width:640px){.hero{grid-template-columns:1fr;padding-top:1.5rem}.hero img{max-width:260px}}
+@media(prefers-reduced-motion:no-preference){.hero img{animation:in .8s ease both}@keyframes in{from{opacity:0}to{opacity:1}}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const $=s=>document.querySelector(s);
+const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+ set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let chapters=[],cur=null;
+
+fetch('chapters.json').then(r=>r.json()).then(d=>{chapters=d;route()}).catch(()=>{
+ $('#app').innerHTML='<div class="end"><h3>Chapterlar ro\'yxati ochilmadi</h3><p>chapters.json faylini tekshiring. Sayt lokal ochilgan bo\'lsa, server orqali (Live Server) oching.</p></div>'});
+addEventListener('hashchange',route);
+
+const pad=n=>String(n).padStart(2,'0');
+const pageUrl=(c,i)=>`${c.folder}/${pad(i+1)}.${c.ext||'webp'}`;
+
+function route(){
+ cur=null;scrollTo(0,0);
+ const m=location.hash.match(/^#\/read\/(\d+)/);
+ m?reader(+m[1]):home();
+}
+
+function home(){
+ document.title="Yorug'lik Tugagan Joyda";
+ const done=store.get('done',[]),last=store.get('last',null);
+ const first=chapters[0];
+ const go=last&&chapters.find(c=>c.id===last)?last:(first&&first.id);
+ $('#app').innerHTML=`
+ <section class="hero">
+  <img src="${first?pageUrl(first,0):''}" alt="Muqova">
+  <div>
+   <h1>Yorug'lik Tugagan Joyda</h1>
+   <div class="jp">光が終わる場所で</div>
+   <div class="status">Davom etmoqda · ${chapters.length}/12 chapter</div>
+   <p>Ba'zan eng qorong'u joyda ham yangi bir yorug'lik boshlanadi. Bekatda to'xtagan vaqt va uni kutib turgan mushuk haqida hikoya.</p>
+   <button class="main" id="start">${last?"Davom etish":"O'qishni boshlash"}</button>
+  </div>
+ </section>
+ <section class="list"><h2>Chapterlar</h2>
+  ${chapters.map(c=>`<button class="ch ${done.includes(c.id)?'read':''}" data-id="${c.id}">
+    <span class="n">${c.id}</span><span class="t">${c.title}<br><small>${c.pages} sahifa</small></span></button>`).join('')}
+  ${chapters.length<12?`<div class="soon">Yangi chapterlar tez orada</div>`:''}
+ </section>`;
+ $('#start').onclick=()=>location.hash='#/read/'+go;
+ document.querySelectorAll('.ch').forEach(b=>b.onclick=()=>location.hash='#/read/'+b.dataset.id);
+}
+
+function reader(id){
+ const i=chapters.findIndex(c=>c.id===id);
+ if(i<0)return home();
+ const c=chapters[i],prev=chapters[i-1],next=chapters[i+1];
+ let mode=store.get('mode','v'); // v = vertical, p = sahifama-sahifa
+ let idx=0;
+ store.set('last',id);
+ document.title=`${c.id}-chapter · ${c.title}`;
+ const urls=[...Array(c.pages)].map((_,k)=>pageUrl(c,k));
+ const endHtml=`<div class="end"><h3>${c.id}-chapter tugadi</h3>
+   <p>${next?`Keyingisi: ${next.title}`:"Yangi chapter tez orada chiqadi"}</p>
+   <div class="btns">${prev?`<button data-go="${prev.id}">Oldingi chapter</button>`:''}
+   <button data-home>Chapterlar</button>
+   ${next?`<button class="main" data-go="${next.id}">Keyingi chapter</button>`:''}</div></div>`;
+
+ $('#app').innerHTML=`
+  <div class="bar"><div class="row">
+   <button id="back">Orqaga</button><div class="ttl">${c.id}. ${c.title}</div>
+   <button id="mode"></button></div><div class="prog"><i id="pg"></i></div></div>
+  <div id="view"></div>`;
+
+ const view=$('#view'),pg=$('#pg');
+ const bindEnd=()=>{
+  view.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>location.hash='#/read/'+b.dataset.go);
+  const h=view.querySelector('[data-home]');if(h)h.onclick=()=>location.hash='#/';
+ };
+ const markDone=()=>{const d=store.get('done',[]);if(!d.includes(id)){d.push(id);store.set('done',d)}};
+
+ function draw(){
+  $('#mode').textContent=mode==='v'?'Sahifama-sahifa':'Vertikal';
+  if(mode==='v'){
+   view.className='v';
+   view.innerHTML=urls.map((u,k)=>`<img src="${u}" alt="${k+1}-sahifa" ${k?'loading="lazy"':''}>`).join('')+endHtml;
+   bindEnd();onScroll();
+  }else{
+   view.className='p';
+   show();
+  }
+ }
+ function show(){
+  idx=Math.max(0,Math.min(c.pages,idx));
+  pg.style.width=(idx/c.pages*100)+'%';
+  if(idx>=c.pages){markDone();view.innerHTML=endHtml;bindEnd();return}
+  view.innerHTML=`<img src="${urls[idx]}" alt="${idx+1}-sahifa">
+   <button class="zone zl" aria-label="Oldingi sahifa"></button><button class="zone zr" aria-label="Keyingi sahifa"></button>
+   <div class="cnt">${idx+1} / ${c.pages}</div>`;
+  view.querySelector('.zl').onclick=()=>{idx--;show()};
+  view.querySelector('.zr').onclick=()=>{idx++;show()};
+  if(urls[idx+1])new Image().src=urls[idx+1];
+  scrollTo(0,0);
+ }
+ function onScroll(){
+  if(mode!=='v')return;
+  const max=document.documentElement.scrollHeight-innerHeight;
+  const f=max>0?scrollY/max:0;
+  pg.style.width=(f*100)+'%';
+  if(f>.9)markDone();
+ }
+ $('#mode').onclick=()=>{mode=mode==='v'?'p':'v';store.set('mode',mode);idx=0;scrollTo(0,0);draw()};
+ $('#back').onclick=()=>location.hash='#/';
+ cur={key:e=>{
+   if(mode!=='p')return;
+   if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();idx++;show()}
+   if(e.key==='ArrowLeft'){idx--;show()}
+  },scroll:onScroll};
+ draw();
+}
+addEventListener('keydown',e=>cur&&cur.key(e));
+addEventListener('scroll',()=>cur&&cur.scroll(),{passive:true});
+</script>
+</body>
+</html>
