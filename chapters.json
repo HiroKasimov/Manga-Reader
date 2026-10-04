@@ -1,0 +1,274 @@
+{
+ "seasons": [
+  {
+   "id": 1,
+   "title": "1-sezon",
+   "chapters": [
+    {
+     "id": 1,
+     "title": "Bekatdagi mushuk",
+     "folder": "manga/s1/ch01",
+     "pages": 8,
+     "ext": "webp"
+    },
+    {
+     "id": 2,
+     "title": "Unutilgan xotiralar",
+     "folder": "manga/s1/ch02",
+     "pages": 10,
+     "ext": "webp"
+    },
+    {
+     "id": 3,
+     "title": "Ikkinchi dunyo",
+     "folder": "manga/s1/ch03",
+     "pages": 14,
+     "ext": "webp"
+    },
+    {
+     "id": 4,
+     "title": "Tanlov",
+     "folder": "manga/s1/ch04",
+     "pages": 13,
+     "ext": "webp"
+    },
+    {
+     "id": 5,
+     "title": "Haqiqiy voqea",
+     "folder": "manga/s1/ch05",
+     "pages": 14,
+     "ext": "webp"
+    },
+    {
+     "id": 6,
+     "title": "Ikki dunyo orasida",
+     "folder": "manga/s1/ch06",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 7,
+     "title": "O'tgan vaqtning haqiqati",
+     "folder": "manga/s1/ch07",
+     "pages": 12,
+     "ext": "webp"
+    },
+    {
+     "id": 8,
+     "title": "Ikkinchi men",
+     "folder": "manga/s1/ch08",
+     "pages": 14,
+     "ext": "webp"
+    },
+    {
+     "id": 9,
+     "title": "Unutilgan tun",
+     "folder": "manga/s1/ch09",
+     "pages": 16,
+     "ext": "webp"
+    },
+    {
+     "id": 10,
+     "title": "Mushukning oxirgi yo'li",
+     "folder": "manga/s1/ch10",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 11,
+     "title": "Yorug'lik tugagan joyda",
+     "folder": "manga/s1/ch11",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 12,
+     "title": "00:00",
+     "folder": "manga/s1/ch12",
+     "pages": 15,
+     "ext": "webp"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "title": "2-sezon",
+   "chapters": [
+    {
+     "id": 1,
+     "title": "00:01",
+     "folder": "manga/s2/ch01",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 2,
+     "title": "Begona qiz",
+     "folder": "manga/s2/ch02",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 3,
+     "title": "Eshik ortidagi dunyo",
+     "folder": "manga/s2/ch03",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 4,
+     "title": "Parchalangan xotiralar",
+     "folder": "manga/s2/ch04",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 5,
+     "title": "Yo'qolgan men",
+     "folder": "manga/s2/ch05",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 6,
+     "title": "Haqiqatga yaqinlashganda",
+     "folder": "manga/s2/ch06",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 7,
+     "title": "Oxirgi eshik",
+     "folder": "manga/s2/ch07",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 8,
+     "title": "Nolinchi xotira",
+     "folder": "manga/s2/ch08",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 9,
+     "title": "Ikki dunyo orasida",
+     "folder": "manga/s2/ch09",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 10,
+     "title": "Haqiqat eshigi",
+     "folder": "manga/s2/ch10",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 11,
+     "title": "Yangi boshlanish",
+     "folder": "manga/s2/ch11",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 12,
+     "title": "Yana oldinga",
+     "folder": "manga/s2/ch12",
+     "pages": 15,
+     "ext": "webp"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "title": "3-sezon · Final",
+   "chapters": [
+    {
+     "id": 1,
+     "title": "Oxirgi bekat",
+     "folder": "manga/s3/ch01",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 2,
+     "title": "Yangi izlar",
+     "folder": "manga/s3/ch02",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 3,
+     "title": "Yashirin haqiqat",
+     "folder": "manga/s3/ch03",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 4,
+     "title": "Sindirilgan ishonch",
+     "folder": "manga/s3/ch04",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 5,
+     "title": "Yo'qotilgan xotiralar",
+     "folder": "manga/s3/ch05",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 6,
+     "title": "Qaytgan xotiralar",
+     "folder": "manga/s3/ch06",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 7,
+     "title": "Yashirin haqiqat",
+     "folder": "manga/s3/ch07",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 8,
+     "title": "Eslatmalar ichida",
+     "folder": "manga/s3/ch08",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 9,
+     "title": "Yo'qolgan qism",
+     "folder": "manga/s3/ch09",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 10,
+     "title": "Oxirgi qaror",
+     "folder": "manga/s3/ch10",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 11,
+     "title": "Birinchi bekat",
+     "folder": "manga/s3/ch11",
+     "pages": 15,
+     "ext": "webp"
+    },
+    {
+     "id": 12,
+     "title": "Oxirgi sahifa",
+     "folder": "manga/s3/ch12",
+     "pages": 15,
+     "ext": "webp"
+    }
+   ]
+  }
+ ]
+}
